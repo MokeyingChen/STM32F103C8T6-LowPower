@@ -1,0 +1,59 @@
+1、AT  //测试指令
+
+2、AT+RST  //复位指令
+
+3、AT+CWMODE=1  //设置为station模式
+
+4、AT+CWDHCP=1,1  //启动DHCP
+
+5、AT+CWJAP="ESP8266","12345678"
+
+6、AT+MQTTUSERCFG=0,1,"LED","0S43la9qNI","version=2018-10-31&res=products%2F0S43la9qNI%2Fdevices%2FLED&et=2073965140&method=md5&sign=vf8wKtqkrdoj3jkloeByMw%3D%3D",0,0,""
+
+7、AT+MQTTCONN=0,"mqtts.heclouds.com",1883,1
+
+8、AT+MQTTSUB=0,"$sys/0S43la9qNI/LED/thing/property/post/reply",1
+
+9.AT+MQTTSUB=0,"$sys/0S43la9qNI/LED/thing/property/set",1
+
+10、
+AT+MQTTPUB=0,"$sys/0S43la9qNI/LED/thing/property/post","{\"id\":\"123\"\,\"params\":{\"LightSwitch\":{\"value\":true\}}}",0,0
+
+AT+MQTTPUB=0,"$sys/0S43la9qNI/LED/thing/property/post","{\"id\":\"123\"\,\"params\":{\"LightSwitch\":{\"value\":false\}}}",0,0
+
+通信主题:
+
+设备属性上报请求(发布):$sys/0S43la9qNI/LED/thing/property/post
+
+设备属性上报响应(订阅):$sys/0S43la9qNI/LED/thing/property/post/reply
+
+
+////////////////////////////////////////////////////////////////////////////////////
+数据:
+设备名称/ID:znjj
+设备密钥:aUxuWldEZVAxR240dW8zY0R0WlV5ODFrQ1pka2lHQnQ=
+产品ID:s3nK7z0Xuq
+服务地址URL:mqtts.heclouds.com
+端口号:1883
+
+res:
+products/s3nK7z0Xuq/devices/znjj
+
+et:
+1917072926
+
+key:
+aUxuWldEZVAxR240dW8zY0R0WlV5ODFrQ1pka2lHQnQ=
+
+token:
+version=2018-10-31&res=products%2Fs3nK7z0Xuq%2Fdevices%2Fznjj&et=1917072926&method=md5&sign=F7CFKEE17BQ2Sa%2BCAVf%2FSA%3D%3D
+
+
+
+
+///////////////////////////
+"LED"在这两个上下文中代表不同的东西：
+
+在 AT+MQTTUSERCFG 命令中，“LED” 是作为客户端ID（Client ID）的一部分。客户端ID是MQTT客户端连接到服务器时用来标识自己的字符串。在这个例子中，客户端ID被设置为 “LED”，这意味着这个ESP8266设备在MQTT服务器上注册时将使用 “LED” 作为其标识。
+在主题字符串 "$sys/0S43la9qNI/LED/thing/property/post/reply" 中，“LED” 是主题路径的一部分，通常用来指定设备类型或者设备的特定功能。在这个上下文中，“LED” 可能指的是与这个MQTT客户端相关的LED设备或者LED功能。主题字符串通常是由服务器或者服务提供商定义的，用于区分不同的消息类型和设备。
+总结来说，AT+MQTTUSERCFG 中的 “LED” 是设备在MQTT服务器上的标识，而主题字符串中的 “LED” 是用来指定消息相关的设备或功能。这两个 “LED” 在MQTT通信中的作用和含义是不同的。
